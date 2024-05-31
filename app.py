@@ -32,7 +32,7 @@ def diagnose():
         type: string
         required: true
       - in: query
-        name: kaszel_z_flegma
+        name: flegma
         type: string
         required: true
       - in: query
@@ -48,7 +48,7 @@ def diagnose():
         type: string
         required: true
       - in: query
-        name: sennosc_w_dzien
+        name: sennosc
         type: string
         required: true
       - in: query
@@ -105,11 +105,11 @@ def diagnose():
     bol_w_klatce = request.args.get('bol_w_klatce')
     goraczka = request.args.get('goraczka')
     kaszel = request.args.get('kaszel')
-    kaszel_z_flegma = request.args.get('kaszel_z_flegma')
+    flegma = request.args.get('kaszel_z_flegma')
     krwioplucie = request.args.get('krwioplucie')
     nocne_poty = request.args.get('nocne_poty')
     obrzek_nog = request.args.get('obrzęk_nog')
-    sennosc_w_dzien = request.args.get('sennosc_w_dzien')
+    sennosc = request.args.get('sennosc')
     sinica = request.args.get('sinica')
     splycenie_oddechu = request.args.get('splycenie_oddechu')
     suchosc_w_ustach = request.args.get('suchosc_w_ustach')
@@ -121,12 +121,12 @@ def diagnose():
     zmeczenie = request.args.get('zmeczenie')
     zmniejszony_apetyt = request.args.get('zmniejszony_apetyt')
 
-    for symptom, value in apatia, bol_w_klatce, goraczka, kaszel, kaszel_z_flegma, krwioplucie, nocne_poty, obrzek_nog, sennosc_w_dzien, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt:
+    for symptom, value in apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog, sennosc, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt:
         if not validate_symptom(value):
             return jsonify({"error": f"Invalid value for {symptom}"}), 400
 
-    symptoms = Symptoms(apatia, bol_w_klatce, goraczka, kaszel, kaszel_z_flegma, krwioplucie, nocne_poty, obrzek_nog,
-                        sennosc_w_dzien, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech,
+    symptoms = Symptoms(apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog,
+                        sennosc, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech,
                         szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie,
                         zmniejszony_apetyt)
     print(symptoms.apatia)
