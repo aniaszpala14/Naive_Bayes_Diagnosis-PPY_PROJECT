@@ -17,86 +17,95 @@
 from flask import Flask, jsonify, request
 from flasgger import Swagger
 
+from Models import Symptoms
+
 app = Flask(__name__)
 swagger = Swagger(app)
 
 @app.route('/diagnose', methods=['POST'])
-def diagnose():
+def diagnose(apatia, bol_w_klatce, goraczka, kaszel, kaszel_z_flegma, krwioplucie, nocne_poty, obrzęk_nog, sennosc_w_dzien, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt):
     """
     Diagnose a patient based on symptoms
     ---
     tags:
       - diagnosis
     parameters:
-      - in: body
-        name: body
-        description: Patient symptoms
+      - in: query
+        name: apatia
+        type: string
         required: true
-        schema:
-          type: object
-          properties:
-            kaszel:
-              type: string
-            dusznosc:
-              type: string
-            bol_w_klatce:
-              type: string
-            goraczka:
-              type: string
-            swiszczacy_oddech:
-              type: string
-            utrata_wagi:
-              type: string
-            zmeczenie:
-              type: string
-            krwioplucie:
-              type: string
-            nocne_poty:
-              type: string
-            splycenie_oddechu:
-              type: string
-            sinica:
-              type: string
-            apatia:
-              type: string
-            kaszel_z_flegma:
-              type: string
-            obrzęk_nog:
-              type: string
-            suchosc_w_ustach:
-              type: string
-            zmniejszony_apetyt:
-              type: string
-            utrudnione_oddychanie:
-              type: string
-            szybkie_bicie_serca:
-              type: string
-            sennosc_w_dzien:
-              type: string
-            zawroty_glowy:
-              type: string
-          example: {
-              "kaszel": "Tak",
-              "dusznosc": "Tak",
-              "bol_w_klatce": "Tak",
-              "goraczka": "Czasami",
-              "swiszczacy_oddech": "Czasami",
-              "utrata_wagi": "Tak",
-              "zmeczenie": "Tak",
-              "krwioplucie": "Tak",
-              "nocne_poty": "Czasami",
-              "splycenie_oddechu": "Tak",
-              "sinica": "Tak",
-              "apatia": "Tak",
-              "kaszel_z_flegma": "Czasami",
-              "obrzęk_nog": "Tak",
-              "suchosc_w_ustach": "Nie",
-              "zmniejszony_apetyt": "Tak",
-              "utrudnione_oddychanie": "Tak",
-              "szybkie_bicie_serca": "Czasami",
-              "sennosc_w_dzien": "Czasami",
-              "zawroty_glowy": "Tak"
-          }
+      - in: query
+        name: bol_w_klatce
+        type: string
+        required: true
+      - in: query
+        name: goraczka
+        type: string
+        required: true
+      - in: query
+        name: kaszel
+        type: string
+        required: true
+      - in: query
+        name: kaszel_z_flegma
+        type: string
+        required: true
+      - in: query
+        name: krwioplucie
+        type: string
+        required: true
+      - in: query
+        name: nocne_poty
+        type: string
+        required: true
+      - in: query
+        name: obrzęk_nog
+        type: string
+        required: true
+      - in: query
+        name: sennosc_w_dzien
+        type: string
+        required: true
+      - in: query
+        name: sinica
+        type: string
+        required: true
+      - in: query
+        name: splycenie_oddechu
+        type: string
+        required: true
+      - in: query
+        name: suchosc_w_ustach
+        type: string
+        required: true
+      - in: query
+        name: swiszczacy_oddech
+        type: string
+        required: true
+      - in: query
+        name: szybkie_bicie_serca
+        type: string
+        required: true
+      - in: query
+        name: utrata_wagi
+        type: string
+        required: true
+      - in: query
+        name: utrudnione_oddychanie
+        type: string
+        required: true
+      - in: query
+        name: zawroty_glowy
+        type: string
+        required: true
+      - in: query
+        name: zmeczenie
+        type: string
+        required: true
+      - in: query
+        name: zmniejszony_apetyt
+        type: string
+        required: true
     responses:
       200:
         description: successful operation
@@ -105,10 +114,12 @@ def diagnose():
           properties:
             diagnosis:
               type: string
+
     """
-    data = request.json
+    # Przetwarzanie objawów i diagnoza
     diagnosis = "Sample Diagnosis"
     return jsonify({"diagnosis": diagnosis})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
