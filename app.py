@@ -91,6 +91,10 @@ def diagnose():
         name: zmniejszony_apetyt
         type: string
         required: true
+         - in: query
+        name: dusznosc
+        type: string
+        required: true
     responses:
       200:
         description: successful operation
@@ -120,6 +124,7 @@ def diagnose():
     zawroty_glowy = request.args.get('zawroty_glowy')
     zmeczenie = request.args.get('zmeczenie')
     zmniejszony_apetyt = request.args.get('zmniejszony_apetyt')
+    dusznosc=request.args.get('dusznosc')
 
     for symptom, value in apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog, sennosc, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt:
         if not validate_symptom(value):
@@ -128,7 +133,7 @@ def diagnose():
     symptoms = Symptoms(apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog,
                         sennosc, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech,
                         szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie,
-                        zmniejszony_apetyt)
+                        zmniejszony_apetyt,dusznosc)
     print(symptoms.apatia)
 
     # Przetwarzanie objawów i diagnoza
