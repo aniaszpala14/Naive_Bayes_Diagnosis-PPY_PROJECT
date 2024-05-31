@@ -121,18 +121,15 @@ def diagnose():
     zmeczenie = request.args.get('zmeczenie')
     zmniejszony_apetyt = request.args.get('zmniejszony_apetyt')
 
+    for symptom, value in apatia, bol_w_klatce, goraczka, kaszel, kaszel_z_flegma, krwioplucie, nocne_poty, obrzek_nog, sennosc_w_dzien, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt:
+        if not validate_symptom(value):
+            return jsonify({"error": f"Invalid value for {symptom}"}), 400
+
     symptoms = Symptoms(apatia, bol_w_klatce, goraczka, kaszel, kaszel_z_flegma, krwioplucie, nocne_poty, obrzek_nog,
                         sennosc_w_dzien, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech,
                         szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie,
                         zmniejszony_apetyt)
     print(symptoms.apatia)
-
-    for symptom, value in apatia,bol_w_klatce,goraczka,kaszel,kaszel_z_flegma,krwioplucie,nocne_poty,obrzek_nog,sennosc_w_dzien,sinica,splycenie_oddechu,suchosc_w_ustach,swiszczacy_oddech,szybkie_bicie_serca,utrata_wagi,utrudnione_oddychanie,zawroty_glowy,zmeczenie,zmniejszony_apetyt:
-        if not validate_symptom(value):
-            return jsonify({"error": f"Invalid value for {symptom}"}), 400
-
-
-
 
     # Przetwarzanie objawów i diagnoza
     diagnosis = "Sample Diagnosis"
