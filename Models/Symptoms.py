@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 class Symptoms:
     apatia: str
     kaszel: str
@@ -44,3 +47,4 @@ class Symptoms:
         self.zawroty_glowy = zawroty_glowy
         self.zmeczenie = zmeczenie
         self.zmniejszony_apetyt = zmniejszony_apetyt
+

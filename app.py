@@ -7,8 +7,6 @@ from Models.Symptoms import Symptoms
 app = Flask(__name__)
 swagger = Swagger(app)
 
-
-
 @app.route('/diagnose', methods=['POST'])
 def diagnose():
     """
@@ -103,8 +101,6 @@ def diagnose():
               type: string
     """
 
-
-
     apatia = request.args.get('apatia')
     bol_w_klatce = request.args.get('bol_w_klatce')
     goraczka = request.args.get('goraczka')
@@ -131,11 +127,22 @@ def diagnose():
                         zmniejszony_apetyt)
     print(symptoms.apatia)
 
+    for symptom, value in apatia,bol_w_klatce,goraczka,kaszel,kaszel_z_flegma,krwioplucie,nocne_poty,obrzek_nog,sennosc_w_dzien,sinica,splycenie_oddechu,suchosc_w_ustach,swiszczacy_oddech,szybkie_bicie_serca,utrata_wagi,utrudnione_oddychanie,zawroty_glowy,zmeczenie,zmniejszony_apetyt:
+        if not validate_symptom(value):
+            return jsonify({"error": f"Invalid value for {symptom}"}), 400
+
+
+
+
     # Przetwarzanie objawów i diagnoza
     diagnosis = "Sample Diagnosis"
     return jsonify({"diagnosis": diagnosis})
 
-
+def validate_symptom(symptom):
+    valid_values = {"tak", "nie", "czasami"}
+    if symptom not in valid_values:
+        return False
+    return True
 
 if __name__ == '__main__':
     app.run(debug=True)
