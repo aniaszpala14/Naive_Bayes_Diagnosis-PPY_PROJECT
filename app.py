@@ -1,6 +1,6 @@
-# http://127.0.0.1:5000/apidocs
-from flask import Flask, jsonify, request
-from flasgger import Swagger, swag_from
+#http://127.0.0.1:5000/apidocs
+from flask import flask, jsonify, request
+from flasgger import swagger, swag_from
 
 from Models.Symptoms import Symptoms
 
@@ -130,10 +130,9 @@ def diagnose():
         if not validate_symptom(value):
             return jsonify({"error": f"Invalid value for {symptom}"}), 400
 
-    symptoms = Symptoms(apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog,
-                        sennosc, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech,
-                        szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie,
-                        zmniejszony_apetyt,dusznosc)
+    symptoms = Symptoms(apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog, sennosc,
+                        sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca,
+                        utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt, dusznosc, "")
     print(symptoms.apatia)
 
     # Przetwarzanie objawów i diagnoza

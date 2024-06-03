@@ -22,12 +22,13 @@ class Symptoms:
     szybkie_bicie_serca: str
     sennosc: str
     zawroty_glowy: str
+    choroba: str
 
     def __init__(self, apatia: str, bol_w_klatce: str, goraczka: str, kaszel: str, flegma: str,
                  krwioplucie: str, nocne_poty: str, obrzek_nog: str, sennosc: str, sinica: str,
                  splycenie_oddechu: str, suchosc_w_ustach: str, swiszczacy_oddech: str, szybkie_bicie_serca: str,
                  utrata_wagi: str, utrudnione_oddychanie: str, zawroty_glowy: str, zmeczenie: str,
-                 zmniejszony_apetyt: str,dusznosc:str):
+                 zmniejszony_apetyt: str, dusznosc: str, choroba: str = ""):
         self.apatia = apatia
         self.bol_w_klatce = bol_w_klatce
         self.goraczka = goraczka
@@ -47,5 +48,8 @@ class Symptoms:
         self.zawroty_glowy = zawroty_glowy
         self.zmeczenie = zmeczenie
         self.zmniejszony_apetyt = zmniejszony_apetyt
-        self.dusznosc=dusznosc
+        self.dusznosc = dusznosc
+        self.choroba = choroba
+
+
 
