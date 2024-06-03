@@ -8,7 +8,6 @@ from flasgger import swag_from, Swagger
 # from flasgger import swag_from, Swagger
 
 
-
 from Classifiers.Classifire import Classifire
 from Database.DatabaseConnection import DatabaseConnection
 from Models.Symptoms import Symptoms
