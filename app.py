@@ -1,7 +1,13 @@
 #http://127.0.0.1:5000/apidocs
 
-from flask import flask, jsonify, request, Flask
+from flask import render_template, jsonify, request,Flask
 from flasgger import swag_from, Swagger
+
+# from flask import render_template, jsonify, request
+# import connexion
+# from flasgger import swag_from, Swagger
+
+
 
 from Classifiers.Classifire import Classifire
 from Database.DatabaseConnection import DatabaseConnection
@@ -9,6 +15,11 @@ from Models.Symptoms import Symptoms
 
 app = Flask(__name__)
 swagger = Swagger(app)
+
+
+# app = connexion.App(__name__, specification_dir='./')
+# app.add_api('swagger.yml')
+
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose():
@@ -94,7 +105,7 @@ def diagnose():
         name: zmniejszony_apetyt
         type: string
         required: true
-         - in: query
+      - in: query
         name: dusznosc
         type: string
         required: true
@@ -138,11 +149,11 @@ def diagnose():
                         utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt, dusznosc, "")
     print(symptoms.apatia)
 
-    base = DatabaseConnection()
-    map_poidCh: {} = base.map_poidCh
-    classifire = Classifire(symptoms, map_poidCh)
-
-
+    # base = DatabaseConnection()
+    # map_poidCh: {} = base.map_poidCh
+    # classifire = Classifire(symptoms, map_poidCh)
+    #
+    #
 
 
 
