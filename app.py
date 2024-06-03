@@ -2,6 +2,8 @@
 from flask import flask, jsonify, request, Flask
 from flasgger import  swag_from, Swagger
 
+from Classifiers.Classifire import Classifire
+from Database.DatabaseConnection import DatabaseConnection
 from Models.Symptoms import Symptoms
 
 app = Flask(__name__)
@@ -135,6 +137,9 @@ def diagnose():
                         utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt, dusznosc, "")
     print(symptoms.apatia)
 
+    base = DatabaseConnection()
+    map_poidCh: {} = base.map_poidCh
+    classifire = Classifire(symptoms, map_poidCh)
 
 
 

@@ -2,7 +2,7 @@ import sqlite3
 
 from Models.Disease import  Disease
 from Models.Symptoms import Symptoms
-class Connection():
+class DatabaseConnection():
     con: sqlite3.Connection
     list: []
     list_choroby: []
