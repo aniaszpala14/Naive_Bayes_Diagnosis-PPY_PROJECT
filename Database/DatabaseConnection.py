@@ -1,6 +1,6 @@
 import sqlite3
 
-from Models.ChorobaModel import ChorobaModel
+from Models.Disease import  Disease
 from Models.Symptoms import Symptoms
 class Connection():
     con: sqlite3.Connection
@@ -35,7 +35,7 @@ class Connection():
         choroby = cur.fetchall()
         list_choroby = []
         for choroba in choroby:
-            list_choroby.append(ChorobaModel(choroba['idCh'],choroba['nazwa']))
+            list_choroby.append(Disease(choroba['idCh'],choroba['nazwa']))
         return list_choroby
 
     def podzielListPoidCh(self):

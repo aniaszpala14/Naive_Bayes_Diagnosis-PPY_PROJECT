@@ -1,4 +1,4 @@
-class ChorobaModel():
+class Disease():
     idCh: int
     nazwa: str
 
