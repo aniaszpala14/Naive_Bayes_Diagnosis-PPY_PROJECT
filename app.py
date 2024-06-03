@@ -1,6 +1,7 @@
 #http://127.0.0.1:5000/apidocs
+
 from flask import flask, jsonify, request, Flask
-from flasgger import  swag_from, Swagger
+from flasgger import swag_from, Swagger
 
 from Classifiers.Classifire import Classifire
 from Database.DatabaseConnection import DatabaseConnection

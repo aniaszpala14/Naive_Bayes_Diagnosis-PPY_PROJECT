@@ -28,7 +28,7 @@ class DatabaseConnection():
                                  przypadek['utrudnione_oddychanie'],przypadek['szybkie_bicie_serca'],
                                  przypadek['sennosc'],przypadek['zawroty_glowy'],przypadek['idCh']))
 
-    def chorobyToList(self):
+    def chorobyToList(self) -> []:
         self.con.row_factory = sqlite3.Row
         cur = self.con.cursor()
         cur.execute("""SELECT * FROM Choroba""")
@@ -38,7 +38,7 @@ class DatabaseConnection():
             list_choroby.append(Disease(choroba['idCh'],choroba['nazwa']))
         return list_choroby
 
-    def podzielListPoidCh(self):
+    def podzielListPoidCh(self) -> {}:
         list = self.przypadkiToList()
         list_choroby = self.chorobyToList()
         map_poidCh = {}
