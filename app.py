@@ -140,6 +140,7 @@ def diagnose():
     diagnosis = "Sample Diagnosis"
     return jsonify({"diagnosis": diagnosis})
 
+
 def validate_symptom(symptom):
     valid_values = {"tak", "nie", "czasami"}
     if symptom not in valid_values:
