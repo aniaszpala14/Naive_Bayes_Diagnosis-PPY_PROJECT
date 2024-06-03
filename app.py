@@ -1,6 +1,6 @@
 #http://127.0.0.1:5000/apidocs
-from flask import flask, jsonify, request
-from flasgger import swagger, swag_from
+from flask import flask, jsonify, request, Flask
+from flasgger import  swag_from, Swagger
 
 from Models.Symptoms import Symptoms
 
@@ -134,6 +134,11 @@ def diagnose():
                         sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca,
                         utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt, dusznosc, "")
     print(symptoms.apatia)
+
+
+
+
+
 
     # Przetwarzanie objawów i diagnoza
     diagnosis = "Sample Diagnosis"
