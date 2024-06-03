@@ -1,8 +1,11 @@
 import sqlite3
 
+from Models.ChorobaModel import ChorobaModel
 from Models.Symptoms import Symptoms
 class Connection():
     con: sqlite3.Connection
+    list: []
+    list_choroby: []
 
     def __init__(self):
         self.con = sqlite3.connect('master')
@@ -22,6 +25,19 @@ class Connection():
                                  przypadek['splycenie_oddechu'],przypadek['sinica'],przypadek['apatia'],przypadek['flegma'],
                                  przypadek['obrzek_nog'],przypadek['suchosc_w_ustach'],przypadek['zmniejszony_apetyt'],
                                  przypadek['utrudnione_oddychanie'],przypadek['szybkie_bicie_serca'],
-                                 przypadek['sennosc'],przypadek['zawroty_glowy'],choroba['nazwa']))
+                                 przypadek['sennosc'],przypadek['zawroty_glowy'],choroba['idCh']))
+
+    def chorobyToList(self):
+        self.con.row_factory = sqlite3.Row
+        cur = self.con.cursor()
+        cur.execute("""SELECT * FROM Choroba""")
+        choroby = cur.fetchall()
+        list_choroby = []
+        for choroba in choroby:
+            list_choroby.append(ChorobaModel(choroba['idCh'],choroba['nazwa']))
+        return list_choroby
+
+
+
 
 
