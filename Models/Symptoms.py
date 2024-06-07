@@ -23,6 +23,7 @@ class Symptoms:
     sennosc: str
     zawroty_glowy: str
     choroba: str
+    symptoms: []
 
     def __init__(self, apatia: str, bol_w_klatce: str, goraczka: str, kaszel: str, flegma: str,
                  krwioplucie: str, nocne_poty: str, obrzek_nog: str, sennosc: str, sinica: str,
@@ -50,6 +51,15 @@ class Symptoms:
         self.zmniejszony_apetyt = zmniejszony_apetyt
         self.dusznosc = dusznosc
         self.choroba = choroba
+        self.symptoms = self.toList()
 
+    def toList(self) -> []:
+        l = [self.apatia, self.bol_w_klatce, self.goraczka, self.kaszel, self.flegma, self.krwioplucie, self.nocne_poty,
+             self.obrzek_nog, self.sennosc, self.sinica, self.splycenie_oddechu, self.suchosc_w_ustach,
+             self.swiszczacy_oddech, self.szybkie_bicie_serca, self.utrata_wagi, self.utrudnione_oddychanie,
+             self.zawroty_glowy, self.zmeczenie, self.zmniejszony_apetyt, self.dusznosc, self.choroba]
+        return l
 
-
+    def __str__(self):
+        for symptom in self.symptoms:
+            print(symptom)

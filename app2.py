@@ -58,7 +58,7 @@ def submit():
         print(f"{key}: {value}")
         print("lala")
 
-    classifire = Classifire(symptoms, mapa)
+    classifire = Classifire(symptoms, mapa, base.przypadkiToList())
 
 
     wynik = "jeszcze nic "
