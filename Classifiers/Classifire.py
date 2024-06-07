@@ -17,14 +17,18 @@ class Classifire():
     map_poidCh = None
     training: pd.DataFrame
 
-    def __init__(self, given: Symptoms, map_poidCh: {}, training: []):
+    def __init__(self, given: Symptoms, map_poidCh: {}, training: [[]]):
         self.given = given
         self.map_poidCh = map_poidCh
-        self.training = pd.DataFrame(training)
+        self.training = pd.DataFrame(training, columns=["apatia", "bol_w_klatce", "goraczka", "kaszel", "flegma", "krwioplucie", "nocne_poty",
+             "obrzek_nog", "sennosc", "sinica", "splycenie_oddechu", "suchosc_w_ustach",
+             "swiszczacy_oddech", "szybkie_bicie_serca", "utrata_wagi", "utrudnione_oddychanie",
+             "zawroty_glowy", "zmeczenie", "zmniejszony_apetyt", "dusznosc", "choroba"])
         print(self.training)
-        print("gdsdgjdfasd")
-
-
+        X = self.training.loc[:, "apatia":"dusznosc"]
+        Y = self.training.loc[:, "choroba"]
+        print(X)
+        print(Y)
 
     def train(self):
         pass
