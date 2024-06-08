@@ -58,6 +58,8 @@ class Symptoms:
              self.obrzek_nog, self.sennosc, self.sinica, self.splycenie_oddechu, self.suchosc_w_ustach,
              self.swiszczacy_oddech, self.szybkie_bicie_serca, self.utrata_wagi, self.utrudnione_oddychanie,
              self.zawroty_glowy, self.zmeczenie, self.zmniejszony_apetyt, self.dusznosc, self.choroba]
+        if l[len(l) - 1] == "":
+            l.pop(len(l) - 1)
         return l
 
     def __str__(self):
