@@ -1,6 +1,3 @@
-from enum import Enum
-
-
 class Symptoms:
     apatia: str
     kaszel: str
@@ -51,16 +48,17 @@ class Symptoms:
         self.zmniejszony_apetyt = zmniejszony_apetyt
         self.dusznosc = dusznosc
         self.choroba = choroba
-        self.symptoms = self.toList()
+        self.symptoms = self.to_list()
 
-    def toList(self) -> []:
-        l = [self.apatia, self.bol_w_klatce, self.goraczka, self.kaszel, self.flegma, self.krwioplucie, self.nocne_poty,
-             self.obrzek_nog, self.sennosc, self.sinica, self.splycenie_oddechu, self.suchosc_w_ustach,
-             self.swiszczacy_oddech, self.szybkie_bicie_serca, self.utrata_wagi, self.utrudnione_oddychanie,
-             self.zawroty_glowy, self.zmeczenie, self.zmniejszony_apetyt, self.dusznosc, self.choroba]
-        if l[len(l) - 1] == "":
-            l.pop(len(l) - 1)
-        return l
+    def to_list(self) -> []:
+        symptoms = [self.apatia, self.bol_w_klatce, self.goraczka, self.kaszel, self.flegma, self.krwioplucie,
+                    self.nocne_poty, self.obrzek_nog, self.sennosc, self.sinica, self.splycenie_oddechu,
+                    self.suchosc_w_ustach, self.swiszczacy_oddech, self.szybkie_bicie_serca, self.utrata_wagi,
+                    self.utrudnione_oddychanie, self.zawroty_glowy, self.zmeczenie, self.zmniejszony_apetyt,
+                    self.dusznosc, self.choroba]
+        if symptoms[len(symptoms) - 1] == "":
+            symptoms.pop(len(symptoms) - 1)
+        return symptoms
 
     def __str__(self):
         for symptom in self.symptoms:

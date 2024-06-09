@@ -50,6 +50,6 @@ class DatabaseConnection:
         list_choroby = self.chorobyToList()
         map_poidCh = {}
         for choroba in list_choroby:
-            map_poidCh[choroba.idCh] = [x for x in list_przypadkow if x[len(x) - 1] == choroba.idCh]
+            map_poidCh[choroba.idCh] = choroba.nazwa
         self.map_poidCh = map_poidCh
         return map_poidCh

@@ -1,7 +1,7 @@
-class Disease():
-    idCh: int
+class Disease:
+    idch: int
     nazwa: str
 
-    def __init__(self, idCh: int, nazwa: str):
-        self.idCh = idCh
+    def __init__(self, idch: int, nazwa: str):
+        self.idch = idch
         self.nazwa = nazwa
