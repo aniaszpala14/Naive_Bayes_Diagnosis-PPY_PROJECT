@@ -49,7 +49,7 @@ def submit():
                             "")
 
     base = DatabaseConnection()
-    mapa = base.map_poidCh
+    mapa = base.map_poidch
 
     if mapa.items()==None:
         print("mapa jest pusta")

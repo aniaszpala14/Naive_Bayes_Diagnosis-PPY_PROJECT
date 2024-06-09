@@ -14,7 +14,7 @@ class DatabaseConnection:
         )
         self.list = []
         self.list_choroby = []
-        self.map_poidCh = {}
+        self.map_poidch = {}
         print("Connected!")
         self.podzielListPoidCh()
 
@@ -48,8 +48,8 @@ class DatabaseConnection:
     def podzielListPoidCh(self) -> dict:
         list_przypadkow = self.przypadkiToList()
         list_choroby = self.chorobyToList()
-        map_poidCh = {}
+        map_poidch = {}
         for choroba in list_choroby:
-            map_poidCh[choroba.idCh] = choroba.nazwa
-        self.map_poidCh = map_poidCh
-        return map_poidCh
+            map_poidch[choroba.idch] = choroba.nazwa
+        self.map_poidch = map_poidch
+        return map_poidch
