@@ -52,11 +52,9 @@ def submit():
     base = DatabaseConnection()
     mapa = base.map_poidCh
 
-    if mapa.items()==None:
-        print("mapa jest pusta")
     for key, value in mapa.items():
-        print(f"{key}: {value}")
-        print("lala")
+        for attr, val in vars(value).items():
+            print(f"{attr}: {val}")
 
     classifire = Classifire(symptoms, mapa)
 
