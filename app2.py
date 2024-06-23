@@ -12,8 +12,6 @@ def index():
     return render_template('index.html')
 
 
-def validate_symptom(value):
-    pass
 
 
 @app2.route('/submit', methods=['GET'])
@@ -38,6 +36,7 @@ def submit():
     zmeczenie = request.args.get('zmeczenie')
     zmniejszony_apetyt = request.args.get('zmniejszony_apetyt')
     dusznosc = request.args.get('dusznosc')
+    print(suchosc_w_ustach)
 
     for value in apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog, sennosc, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt:
         if not validate_symptom(value):
@@ -50,16 +49,16 @@ def submit():
                             "")
 
     base = DatabaseConnection()
-    mapa = base.map_poidCh
+    mapa = base.map_poidch
 
     for key, value in mapa.items():
         for attr, val in vars(value).items():
             print(f"{attr}: {val}")
 
-    classifire = Classifire(symptoms, mapa)
+    classifire = Classifire(symptoms, mapa, base.przypadkiToList())
 
 
-    wynik = "jeszcze nic "
+    wynik = classifire.classify()
     return render_template('result.html', wynik=wynik)
 
 

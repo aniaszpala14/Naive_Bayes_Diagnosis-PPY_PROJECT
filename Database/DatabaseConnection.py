@@ -10,11 +10,11 @@ class DatabaseConnection:
             'PORT=1433;'
             'DATABASE=master;'
             'UID=sa;'
-            'PWD=ania1410@DOCKER'
+            'PWD=Slodko1111*'
         )
         self.list = []
         self.list_choroby = []
-        self.map_poidCh = {}
+        self.map_poidch = {}
         print("Connected!")
         self.podzielListPoidCh()
 
@@ -33,7 +33,7 @@ class DatabaseConnection:
                 przypadek.zmniejszony_apetyt, przypadek.utrudnione_oddyhanie,
                 przypadek.szybkie_bicie_serca, przypadek.sennosc, przypadek.zawroty_glowy,
                 przypadek.idCh
-            ))
+            ).symptoms)
         return list
 
     def chorobyToList(self) -> list:
@@ -48,8 +48,8 @@ class DatabaseConnection:
     def podzielListPoidCh(self) -> dict:
         list_przypadkow = self.przypadkiToList()
         list_choroby = self.chorobyToList()
-        map_poidCh = {}
+        map_poidch = {}
         for choroba in list_choroby:
-            map_poidCh[choroba.idCh] = [x for x in list_przypadkow if x.choroba == choroba.idCh]
-        self.map_poidCh = map_poidCh
-        return map_poidCh
+            map_poidch[choroba.idch] = choroba.nazwa
+        self.map_poidch = map_poidch
+        return map_poidch
