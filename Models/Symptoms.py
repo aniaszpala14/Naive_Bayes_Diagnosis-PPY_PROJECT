@@ -63,3 +63,31 @@ class Symptoms:
     def __str__(self):
         for symptom in self.symptoms:
             print(symptom)
+
+    def to_dict(self):
+          return {
+                'apatia': self.apatia,
+                'bol_w_klatce': self.bol_w_klatce,
+                'goraczka': self.goraczka,
+                'kaszel': self.kaszel,
+                'flegma': self.flegma,
+                'krwioplucie': self.krwioplucie,
+                'nocne_poty': self.nocne_poty,
+                'obrzek_nog': self.obrzek_nog,
+                'sennosc': self.sennosc,
+                'sinica': self.sinica,
+                'splycenie_oddechu': self.splycenie_oddechu,
+                'suchosc_w_ustach': self.suchosc_w_ustach,
+                'swiszczacy_oddech': self.swiszczacy_oddech,
+                'szybkie_bicie_serca': self.szybkie_bicie_serca,
+                'utrata_wagi': self.utrata_wagi,
+                'utrudnione_oddychanie': self.utrudnione_oddychanie,
+                'zawroty_glowy': self.zawroty_glowy,
+                'zmeczenie': self.zmeczenie,
+                'zmniejszony_apetyt': self.zmniejszony_apetyt,
+                'dusznosc': self.dusznosc,
+              'choroba': ""
+
+            }
+
+
