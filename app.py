@@ -24,7 +24,6 @@ def description():
     return render_template('description.html')
 @app.route('/index', methods=['GET'])
 def index():
-    # Your code here
     return render_template('index.html')
 
 @app.route('/submit', methods=['GET'])
@@ -117,3 +116,8 @@ def validate_symptom(symptom):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+#bin\windows\kafka-server-start.bat config\server.properties
+#jps
