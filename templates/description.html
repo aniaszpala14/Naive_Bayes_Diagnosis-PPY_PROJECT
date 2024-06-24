@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Opis dzialania programmu</title>
+    <style>
+        body{
+            background-image: url("aniaes14_canva_tlo.jpg");
+            text-align: center;
+        }
+        p{
+            text-wrap: normal;
+            font-weight: bold;
+          color: coral;
+          margin-top: 200px;
+            margin-left: 50px;
+            margin-right:50px;
+        }
+        .tekscik{
+
+            text-align: center;
+            margin-top: 50px;
+            margin-left: 400px;
+            margin-right: 300px;
+            background-color: peachpuff;
+            background-size: 500px;
+            padding: 30px;
+            border-radius: 50%;
+            height: 500px;
+            width: 500px;
+        }
+        .button{
+            margin-top: 20px;
+            color: darksalmon;
+            text-align: center;
+        }
+      .header {
+            background-color: lightcoral ;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+      footer{
+            background-color: lightcoral ;
+            padding: 5px;
+            margin-top: 50px;
+            text-align: left;
+            color: antiquewhite;
+            bold: 5px;
+      }
+        h1 {
+            font-size: 2.5em;
+            color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+<h1>
+    Opis Programu
+</h1>
+</div>
+<div class="tekscik">
+    <p>
+Program ma za zadanie na podstawie wprowadzonych przez użytkownika dolegliwości, zwrócić diagnozę. Do przewidzenia najbardziej prawdopodobnej diagnozy, wykorzystujemy model naiwnego klasyfikatora bayesowskiego.
+    </p>
+      <div class="button">
+    <form action="{{ url_for('index') }}" method="get">
+      <input type="submit" value="PRZEJDŹ DO WYPEŁNIANIA FORMULARZA">
+    </form>
+  </div>
+</div>
+
+<footer>
+    <p>
+        Diagnostyka lekarska - projekt : s27542,s27766
+    </p>
+</footer>
+</body>
+</html>
