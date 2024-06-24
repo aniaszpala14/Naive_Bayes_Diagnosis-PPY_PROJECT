@@ -5,14 +5,36 @@
     <title>Diagnoza</title>
     <style>
         body{
-            background-color: antiquewhite;
-              text-align: center;
+            background-image: url("aniaes14_canva_tlo.jpg");
+            text-align: center;
+        }
+        h1{
+            text-wrap: normal;
+            font-weight: bold;
+            color: coral;
+            margin-top: 200px;
+            margin-left: 50px;
+            margin-right:50px;
+        }
+        .diagnoza{
+            text-align: center;
+            margin-top: 50px;
+            margin-left: 400px;
+            margin-right: 300px;
+            background-color: peachpuff;
+            background-size: 500px;
+            padding: 30px;
+            border-radius: 50%;
+            height: 500px;
+            width: 500px;
         }
     </style>
 </head>
 <body>
     <h1>Diagnoza </h1>
+    <div class="diagnoza">
     <p>Wynik: {{ wynik }}</p>
+    </div>
     <button onclick="window.location.href='/'">Zmień dolegliwości</button>
 </body>
 </html>
