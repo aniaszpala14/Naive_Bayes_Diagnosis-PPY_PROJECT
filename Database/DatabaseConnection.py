@@ -2,6 +2,7 @@ import pyodbc
 from Models.Disease import Disease
 from Models.Symptoms import Symptoms
 
+
 class DatabaseConnection:
     def __init__(self):
         self.con = pyodbc.connect(
@@ -30,7 +31,7 @@ class DatabaseConnection:
                 przypadek.zmeczenie, przypadek.krwioplucie, przypadek.nocne_poty,
                 przypadek.splycenie_oddechu, przypadek.sinica, przypadek.apatia,
                 przypadek.flegma, przypadek.obrzek_nog, przypadek.suchosc_w_ustach,
-                przypadek.zmniejszony_apetyt, przypadek.utrudnione_oddyhanie,
+                przypadek.zmniejszony_apetyt, przypadek.utrudnione_oddychanie,
                 przypadek.szybkie_bicie_serca, przypadek.sennosc, przypadek.zawroty_glowy,
                 przypadek.idCh
             ).symptoms)
@@ -53,3 +54,9 @@ class DatabaseConnection:
             map_poidch[choroba.idch] = choroba.nazwa
         self.map_poidch = map_poidch
         return map_poidch
+
+    def closeConnection(self):
+        self.con.close()
+
+    def commit(self):
+        self.con.commit()

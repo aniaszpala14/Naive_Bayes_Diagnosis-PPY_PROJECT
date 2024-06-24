@@ -51,11 +51,8 @@ def submit():
     base = DatabaseConnection()
     mapa = base.map_poidch
 
-    for key, value in mapa.items():
-        for attr, val in vars(value).items():
-            print(f"{attr}: {val}")
 
-    classifire = Classifire(symptoms, mapa, base.przypadkiToList())
+    classifire = Classifire(symptoms, mapa, base)
 
 
     wynik = classifire.classify()
