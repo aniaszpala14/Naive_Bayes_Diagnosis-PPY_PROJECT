@@ -1,4 +1,4 @@
-import time
+"""import time
 
 from flask import Flask, request, render_template, redirect, url_for
 from confluent_kafka import Producer, Consumer, KafkaException
@@ -121,3 +121,4 @@ if __name__ == '__main__':
 #bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 #bin\windows\kafka-server-start.bat config\server.properties
 #jps
+"""
