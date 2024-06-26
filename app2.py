@@ -1,4 +1,4 @@
-'''
+
 from flask import Flask, request, render_template
 
 from Classifiers.Classifire import Classifire
@@ -49,14 +49,13 @@ def submit():
                             utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt, dusznosc,
                             "")
 
+
     base = DatabaseConnection()
-    mapa = base.map_poidch
-
-
-    classifire = Classifire(symptoms, mapa, base)
+    classifire = Classifire(symptoms, base)
 
 
     wynik = classifire.classify()
+    base.close_connection()
     return render_template('result.html', wynik=wynik)
 
 
@@ -69,4 +68,3 @@ def validate_symptom(symptom):
 
 if __name__ == '__main__':
     app2.run(debug=True)
-'''

@@ -7,19 +7,19 @@ from sklearn.naive_bayes import GaussianNB
 
 class Classifire:
     given: []
-    map_poidch: {}
+    map_by_idch: {}
     training: pd.DataFrame
     model: GaussianNB
     base: DatabaseConnection
 
-    def __init__(self, given: Symptoms, map_poidch: {}, base: DatabaseConnection):
+    def __init__(self, given: Symptoms, base: DatabaseConnection):
         self.given = given.symptoms
-        self.map_poidCh = map_poidch
         self.base = base
+        self.map_by_idch = self.base.map_by_idch
         self.classify()
 
     def train(self):
-        self.training = pd.DataFrame(self.base.przypadkiToLIst(),
+        self.training = pd.DataFrame(self.base.cases_to_list(),
                                      columns=["apatia", "bol_w_klatce", "goraczka", "kaszel", "flegma", "krwioplucie",
                                               "nocne_poty",
                                               "obrzek_nog", "sennosc", "sinica", "splycenie_oddechu",
@@ -38,26 +38,20 @@ class Classifire:
         self.model = GaussianNB()
         self.model.fit(x, y)
 
-
     def classify(self) -> str:
-        cur = self.base.con.cursor()
-        cur.execute('SELECT 1 FROM models WHERE name = "GaussianNB"')
-        model_exists = cur.fetchone()[0] > 0
+        model_exists = self.base.is_model_in_database()
 
         if model_exists:
-            cur.execute('SELECT model FROM models WHERE name = "GaussianNB"')
-            serialized_model = cur.fetchone()[0]
-
+            serialized_model = self.base.get_model()
             self.model = pickle.loads(serialized_model)
         else:
+            self.train()
             serialized_model = pickle.dumps(self.model)
-            cur.execute('''
-                INSERT INTO models (name, model) VALUES ('GaussianNB', serialized_model)''')
+            self.base.add_model(serialized_model)
 
         self.base.commit()
-        self.base.closeConnection()
 
         scale_mapper = {"tak": 1, "czasami": 2, "nie": 3}
         given = [scale_mapper.get(symptom, 0) for symptom in self.given]
         prediction = self.model.predict(pd.DataFrame([given]))
-        return self.map_poidCh.get(prediction[0])
+        return self.map_by_idch.get(prediction[0])
