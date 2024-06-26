@@ -1,4 +1,4 @@
-"""import time
+import time
 
 from flask import Flask, request, render_template, redirect, url_for
 from confluent_kafka import Producer, Consumer, KafkaException
@@ -13,18 +13,24 @@ app = Flask(__name__)
 
 p = Producer({'bootstrap.servers': 'localhost:9092'})
 base = DatabaseConnection()
-mapa = base.map_poidch
+
+
 def delivery_report(err, msg):
     if err is not None:
         print(f'Message delivery failed: {err}')
     else:
         print(f'Message delivered to {msg.topic()} [{msg.partition()}]')
+
+
 @app.route('/')
 def description():
     return render_template('description.html')
+
+
 @app.route('/index', methods=['GET'])
 def index():
     return render_template('index.html')
+
 
 @app.route('/submit', methods=['GET'])
 def submit():
@@ -60,7 +66,6 @@ def submit():
                         utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt, dusznosc,
                         "")
 
-
     data = symptoms.to_dict()
     p.produce('my_topic', value=json.dumps(data), callback=delivery_report)
 
@@ -71,11 +76,14 @@ def submit():
 
     return redirect(url_for('result'))
 
+
 @app.route('/result')
 def result():
     while result is None:
         time.sleep(1)
     return render_template('result.html', wynik=result)
+
+
 def consume():
     c = Consumer({
         'bootstrap.servers': 'localhost:9092',
@@ -93,20 +101,16 @@ def consume():
         else:
             print(f'Received message: {msg.value().decode("utf-8")}')
 
-
             data = json.loads(msg.value().decode("utf-8"))
             symp = Symptoms(data)
-            classifire = Classifire(symp, mapa, base.przypadkiToList())
-            classifire.symptoms = data
+            classifire = Classifire(symp, base)
             wynik = classifire.classify()
-
-            db = DatabaseConnection()
-            db.save_result(wynik)
 
             global result
             result = wynik
             # Przekierowanie do strony z wynikiem
-           # return render_template('result.html', wynik=wynik)
+        # return render_template('result.html', wynik=wynik)
+
 
 def validate_symptom(symptom):
     valid_values = {"tak", "nie", "czasami"}
@@ -114,11 +118,10 @@ def validate_symptom(symptom):
         return False
     return True
 
+
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-#bin\windows\zookeeper-server-start.bat config\zookeeper.properties
-#bin\windows\kafka-server-start.bat config\server.properties
-#jps
-"""
+# bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+# bin\windows\kafka-server-start.bat config\server.properties
+# jps

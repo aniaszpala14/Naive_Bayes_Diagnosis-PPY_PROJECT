@@ -16,7 +16,6 @@ class Classifire:
         self.given = given.symptoms
         self.base = base
         self.map_by_idch = self.base.map_by_idch
-        self.classify()
 
     def train(self):
         self.training = pd.DataFrame(self.base.cases_to_list(),
