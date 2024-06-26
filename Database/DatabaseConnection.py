@@ -10,9 +10,9 @@ class DatabaseConnection:
             'DRIVER={ODBC Driver 17 for SQL Server};'
             'SERVER=localhost;'
             'PORT=1433;'
-            'DATABASE=master;'
+            'DATABASE=ppy;'
             'UID=sa;'
-            'PWD=Slodko1111*'
+            'PWD=ania1410@DOCKER'
         )
         self.list = []
         self.list_diseases = []

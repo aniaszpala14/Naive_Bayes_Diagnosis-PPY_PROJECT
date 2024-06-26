@@ -52,6 +52,14 @@ class Classifire:
         self.base.commit()
 
         scale_mapper = {"tak": 1, "czasami": 2, "nie": 3}
+        features = ["apatia", "bol_w_klatce", "goraczka", "kaszel", "flegma", "krwioplucie", "nocne_poty",
+                    "obrzek_nog", "sennosc", "sinica", "splycenie_oddechu", "suchosc_w_ustach",
+                    "swiszczacy_oddech", "szybkie_bicie_serca", "utrata_wagi", "utrudnione_oddychanie",
+                    "zawroty_glowy", "zmeczenie", "zmniejszony_apetyt", "dusznosc"]
+
+
         given = [scale_mapper.get(symptom, 0) for symptom in self.given]
-        prediction = self.model.predict(pd.DataFrame([given]))
+        given_df = pd.DataFrame([given], columns=features)
+        prediction = self.model.predict(given_df)
+
         return self.map_by_idch.get(prediction[0])

@@ -1,4 +1,5 @@
-"""import time
+import time
+from queue import Queue
 
 from flask import Flask, request, render_template, redirect, url_for
 from confluent_kafka import Producer, Consumer, KafkaException
@@ -13,7 +14,8 @@ app = Flask(__name__)
 
 p = Producer({'bootstrap.servers': 'localhost:9092'})
 base = DatabaseConnection()
-mapa = base.map_poidch
+map=base.map_by_idch
+result_queue = Queue()
 def delivery_report(err, msg):
     if err is not None:
         print(f'Message delivery failed: {err}')
@@ -28,6 +30,7 @@ def index():
 
 @app.route('/submit', methods=['GET'])
 def submit():
+    global result_queue
     apatia = request.args.get('apatia')
     bol_w_klatce = request.args.get('bol_w_klatce')
     goraczka = request.args.get('goraczka')
@@ -48,7 +51,6 @@ def submit():
     zmeczenie = request.args.get('zmeczenie')
     zmniejszony_apetyt = request.args.get('zmniejszony_apetyt')
     dusznosc = request.args.get('dusznosc')
-    print(suchosc_w_ustach)
 
     for value in apatia, bol_w_klatce, goraczka, kaszel, flegma, krwioplucie, nocne_poty, obrzek_nog, sennosc, sinica, splycenie_oddechu, suchosc_w_ustach, swiszczacy_oddech, szybkie_bicie_serca, utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt:
         if not validate_symptom(value):
@@ -60,23 +62,20 @@ def submit():
                         utrata_wagi, utrudnione_oddychanie, zawroty_glowy, zmeczenie, zmniejszony_apetyt, dusznosc,
                         "")
 
-
     data = symptoms.to_dict()
     p.produce('my_topic', value=json.dumps(data), callback=delivery_report)
 
     p.flush()
 
+    while not result_queue.empty():
+        result_queue.get()
+
     consumer_thread = threading.Thread(target=consume)
     consumer_thread.start()
 
     return redirect(url_for('result'))
-
-@app.route('/result')
-def result():
-    while result is None:
-        time.sleep(1)
-    return render_template('result.html', wynik=result)
 def consume():
+    global result_queue
     c = Consumer({
         'bootstrap.servers': 'localhost:9092',
         'group.id': 'my_group',
@@ -93,21 +92,19 @@ def consume():
         else:
             print(f'Received message: {msg.value().decode("utf-8")}')
 
-
             data = json.loads(msg.value().decode("utf-8"))
-            symp = Symptoms(data)
-            classifire = Classifire(symp, mapa, base.przypadkiToList())
-            classifire.symptoms = data
+            symp = Symptoms.from_dict(data)
+            classifire = Classifire(symp, base)
             wynik = classifire.classify()
-
-            db = DatabaseConnection()
-            db.save_result(wynik)
-
-            global result
+            result_queue.put(wynik)
+            print(wynik)
             result = wynik
-            # Przekierowanie do strony z wynikiem
-           # return render_template('result.html', wynik=wynik)
 
+
+@app.route('/result')
+def result():
+    wynik = result_queue.get()
+    return render_template('result.html', wynik=wynik)
 def validate_symptom(symptom):
     valid_values = {"tak", "nie", "czasami"}
     if symptom not in valid_values:
@@ -117,8 +114,6 @@ def validate_symptom(symptom):
 if __name__ == '__main__':
     app.run(debug=True)
 
-
 #bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 #bin\windows\kafka-server-start.bat config\server.properties
 #jps
-"""

@@ -1,4 +1,4 @@
-
+'''
 from flask import Flask, request, render_template
 
 from Classifiers.Classifire import Classifire
@@ -68,3 +68,4 @@ def validate_symptom(symptom):
 
 if __name__ == '__main__':
     app2.run(debug=True)
+'''
