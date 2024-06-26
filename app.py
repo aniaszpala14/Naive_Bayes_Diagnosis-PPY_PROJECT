@@ -95,8 +95,8 @@ def consume():
 
 
             data = json.loads(msg.value().decode("utf-8"))
-
-            classifire = Classifire(data, mapa, base.przypadkiToList())
+            symp = Symptoms(data)
+            classifire = Classifire(symp, mapa, base.przypadkiToList())
             classifire.symptoms = data
             wynik = classifire.classify()
 
